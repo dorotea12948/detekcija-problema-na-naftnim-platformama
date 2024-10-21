@@ -6,11 +6,11 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from twilio.rest import Client
 
-# 1. CNN Model za detekciju oštećenja
+    #Uvodim CNN i tu je detektor oštećenja i problema(nalazi kvarove i ta sranja)
 def create_cnn_model():
     model = Sequential()
     
-    # Konvolucioni slojevi
+    # slojevi i slojevi i slojevi....
     model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(128, 128, 3)))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
@@ -26,14 +26,14 @@ def create_cnn_model():
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     return model
 
-# 2. Funkcija za treniranje modela (prazno mesto za dataset)
+        #Ostavljam prazno mesto za dataset jer još nije popunjeno (logično) i funkcija za treniranje modela 
 def train_model(model):
     # Pretpostavi da ćeš dodati slike u /data/train i /data/validation folderima
     datagen = ImageDataGenerator(rescale=1./255)
 
     train_generator = datagen.flow_from_directory(
-        'data/train',  # Ovdje dodaj trenirane slike
-        target_size=(128, 128),
+        'data/train',  # ovde će leteti trenirana slika
+        target_size=(128, 128), #dimenzije 
         batch_size=32,
         class_mode='binary')
 
@@ -45,18 +45,18 @@ def train_model(model):
 
     model.fit(train_generator, epochs=10, validation_data=validation_generator)
 
-# 3. Funkcija za predikciju oštećenja na slici
+      #Ovo ovde ako ne valja je baš problem. ovde će gledati probleme i ono 
 def detect_damage(image_path, model):
     img = load_img(image_path, target_size=(128, 128))
     img_array = img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0) / 255.0
 
     prediction = model.predict(img_array)
-    return prediction[0][0]  # Binarni izlaz: 0 (bez oštećenja), 1 (oštećenje)
+    return prediction[0][0]  # Binarni izlaz: 0 (bez oštećenja), 1 (oštećenje) 
 
-# 4. Funkcija za slanje upozorenja (korišćenje Twilio servisa)
+      # Alertčina-funkcija ga šalje (korišćenje Twilio servisa)
 def send_alert(phone_number, message):
-    # Twilio informacije (unesi svoje podatke)
+    # Twilio informacije (unesi svoje podatke-iliti direktor al kao ja ću staviti moje jer su direktori zauzeti)
     account_sid = 'TWILIO_ACCOUNT_SID'
     auth_token = 'TWILIO_AUTH_TOKEN'
     client = Client(account_sid, auth_token)
@@ -68,15 +68,15 @@ def send_alert(phone_number, message):
 
     print(f"Upozorenje poslato na: {phone_number}")
 
-# 5. Glavni deo programa
+     #ovo ako ne radi plakaću
 if __name__ == '__main__':
-    # Kreiranje CNN modela
+    # Kreiram CNN model i ta priča
     model = create_cnn_model()
 
-    # Treniraćeš model (unesi slike u 'data/train' i 'data/validation')
+    # Treniram model (unesi slike u 'data/train' i 'data/validation')
     # train_model(model)
 
-    # Predikcija na slici (unesi putanju do slike)
+    # Predikcija sa slike
     image_path = 'path_to_image.jpg'  # Ovo promeni sa pravom slikom
     damage_detected = detect_damage(image_path, model)
 
