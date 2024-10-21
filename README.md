@@ -1,1 +1,2 @@
 # detekcija-problema-na-naftnim-platformama
+u principu projekat radim ja sa mojom porodicom jer se oni bave naftom. Ideja je da ja preko neuronskih mreža (CNN) da skupim datasetove slika sa i bez oštećenja naftnih platformi. Oštećene naftne platforme imaju curenja, eksplozije pupu ne daj Bože i tako to, al ću se primarno fokusirati na curenja jer je to baš baš problem. Naftu ću oboležiti ne znam kojim dimenzijama TAČNO al nešto sitno i da bude određen oblik ( to treba da doradim)jer se može desiti da neko sa crnom majicom prođe ispred senzora pa je to malo problem.
