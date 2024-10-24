@@ -55,7 +55,7 @@ def detect_damage(image_path, model):
     return prediction[0][0]  # Binarni izlaz: 0 (bez oštećenja), 1 (oštećenje) 
 
       # Alertčina-funkcija ga šalje (korišćenje Twilio servisa)
-def send_alert(phone_number, message):
+def send_alert(broj telefona, poruka):
     # Twilio informacije (unesi svoje podatke-iliti direktor al kao ja ću staviti moje jer su direktori zauzeti)
     account_sid = 'TWILIO_ACCOUNT_SID'
     auth_token = 'TWILIO_AUTH_TOKEN'
@@ -66,7 +66,7 @@ def send_alert(phone_number, message):
         from_='+Twilio_Number',
         to=phone_number)
 
-    print(f"Upozorenje poslato na: {phone_number}")
+    print(f"Upozorenje poslato na: {broj_telefona}")
 
      #ovo ako ne radi plakaću
 if __name__ == '__main__':
